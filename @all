@@ -1,0 +1,47 @@
+import os
+import time
+try:
+	import aminofix
+	import pyfiglet
+except:
+	os.system("pip install pyfiglet")
+	import aminofix
+	import pyfiglet
+
+os.system("clear")
+
+A = "\033[1;91m"  #احمر
+Z1 = '\033[2;31m' #احمر ثاني
+E = "\033[1;92m"  #اخضر
+H = "\033[1;93m" #اصفر
+L = "\033[1;95m" #وردي
+B = '\033[2;36m'#سمائي
+Y = '\033[1;34m' #ازرق فاتح 
+M = "\033[1;94m" #ازرك
+t = "_"
+
+
+email = input (A+"\nemail••>> "+L)
+password = input(A+"\npassword••>> "+L)
+
+client=aminofix.Client()
+client.login(email=email,password=password)
+print (E+"\ncompleted")
+link=input(A+"\nchat link••>> "+E)
+p = int(input(H+"\nhow many times?••>> "+E))
+chatinfo=client.get_from_code(link)
+chatId=chatinfo.objectId
+comId=chatinfo.path[1:chatinfo.path.index("/")]
+
+
+subclient=aminofix.SubClient(comId=comId, profile=client.profile)
+for i in range(p):
+	i = i+1
+	chat_users=subclient.get_chat_users(chatId=chatId, start=0, size=999).userId
+	
+	subclient.send_message(chatId=chatId,message="♾️", mentionUserIds=chat_users)
+	print (E+f"\n Done  ✅ [ {i} ] ")
+	time.sleep(2)
+	
+	
+print (H+"\nall done")
