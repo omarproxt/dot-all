@@ -1,11 +1,11 @@
 import os
 import time
 try:
-	import aminofix
+	import ZAminofix
 	import pyfiglet
 except:
 	os.system("pip install pyfiglet")
-	import aminofix
+	import ZAminofix
 	import pyfiglet
 
 os.system("clear")
@@ -24,7 +24,7 @@ t = "_"
 email = input (A+"\nemail••>> "+L)
 password = input(A+"\npassword••>> "+L)
 
-client=aminofix.Client()
+client=ZAminofix.Client()
 client.login(email=email,password=password)
 print (E+"\ncompleted")
 link=input(A+"\nchat link••>> "+E)
@@ -34,7 +34,7 @@ chatId=chatinfo.objectId
 comId=chatinfo.path[1:chatinfo.path.index("/")]
 
 
-subclient=aminofix.SubClient(comId=comId, profile=client.profile)
+subclient=ZAminofix.SubClient(comId=comId, profile=client.profile)
 for i in range(p):
 	i = i+1
 	chat_users=subclient.get_chat_users(chatId=chatId, start=0, size=999).userId
